@@ -24,7 +24,6 @@ export default function Logon () {
       description,
       value,
     }
-    let err;
     try {
       await api.post('incidents', data, {
         headers: {
