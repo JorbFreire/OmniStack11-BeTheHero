@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FiArrowLeft } from 'react-icons/fi'
 import logoImg from '../../assets/logo.svg';
@@ -13,7 +13,7 @@ export default function Register () {
   const [whatsapp, setWhatsapp] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
-
+  const history = useHistory();
 
   async function handleRegister(e){
     e.preventDefault();
@@ -29,10 +29,10 @@ export default function Register () {
     try {
       const response = await api.post('ongs', data );
       alert(`Cadastro realizado com sucesso, seu ID de acesso é: ${response.data.id}`);
+      history.push('/');
     } catch (error) {
       alert('Erro no cadastro, tente novamente');
     }
-    alert('after try/catch');
   } 
 
   return (
