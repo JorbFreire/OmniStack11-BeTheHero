@@ -20,15 +20,15 @@ export default function Incidents() {
   const [incidents, setIncidents] = useState([]);
   const [totalIncidents, setTotalIncidents] = useState(0);
 
-  function navigateToDetail() {
-    navigation.navigate('details')
+  function navigateToDetail(incident) {
+    navigation.navigate('details', { incident })
   }
 
   async function loadIncidents() {
     const response = await api.get('incidents');
 
     setIncidents(response.data);
-    setTotalIncidents(response.headers[X-Total-Count]);
+    setTotalIncidents(response.headers['x-total-count']);
   }
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function Incidents() {
 
             <TouchableOpacity
               style={styles.detailsButton}
-              onPress={navigateToDetail}
+              onPress={() => navigateToDetail(incident)}
             >
               <Text style={styles.detailsButtonText}>
                 Ver mais detalhes
